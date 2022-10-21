@@ -26,7 +26,7 @@
                                  description: "I want a best friend.",
                                  status: "In Progress"
                                )
-    @app_2 = AdoptApp.create!(name: "Kristen Jackson",     
+    @app_2 = AdoptApp.create!(name: "Kristen M. Jackson",     
                                   street_address: "1 S Broadway", 
                                   city: "White Plains", 
                                   state: "NY", 
