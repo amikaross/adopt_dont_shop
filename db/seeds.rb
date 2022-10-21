@@ -18,15 +18,15 @@
     @pet_7 = Pet.create(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
     @pet_8 = Pet.create(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
     @pet_8 = Pet.create(adoptable: false, age: 2, breed: 'saint bernard', name: 'Beethoven', shelter_id: @shelter.id)
-    @app = AdoptApp.create!(name: "Amanda Ross",     
-                                street_address: "3220 N Williams St.", 
+    @app = AdoptApp.create!(name: "Amanda Smith",     
+                                street_address: "32 S Anders St.", 
                                  city: "Denver", 
                                  state: "CO", 
                                  zip_code: "80205", 
                                  description: "I want a best friend.",
                                  status: "In Progress"
                                )
-    @app_2 = AdoptApp.create!(name: "Amanda Ross",     
+    @app_2 = AdoptApp.create!(name: "Kristen Jackson",     
                                   street_address: "1 S Broadway", 
                                   city: "White Plains", 
                                   state: "NY", 
