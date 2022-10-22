@@ -13,6 +13,10 @@ class AdoptAppsController < ApplicationController
       @pet = Pet.find(params[:pet_id])
       AdoptAppPet.create!(pet: @pet, adopt_app: @adopt_app)
     end
+
+    if params[:description] != nil
+      @adopt_app.update(:description => params[:description], :status => "Pending")
+    end
     redirect_to "/adopt_apps/#{@adopt_app.id}"
   end
 
