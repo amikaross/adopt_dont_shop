@@ -1,16 +1,15 @@
 <h1> Application Details </h1>
 <p>Name: <%= @adopt_app.name %></p>
 <p>Address: <%= @adopt_app.street_address %> <%= @adopt_app.city %>, <%= @adopt_app.state %> <%= @adopt_app.zip_code %></p>
-<p>Description: <%= @adopt_app.description %></p>
-<% @pets.each do |pet| %>
-  <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
-<% end %>
-<p>Status: <%= @adopt_app.status %></p>
-
-<% if @adopt_app.status == "In Progress" %>
-  <br><%= form_with url: "/adopt_apps/#{@adopt_app.id}", method: :get, local: true do |form| %>
+<p>Description: <%= @adopt_app.description %> </p>
+<p>Pets: <% @pets.each do |pet| %>
+        <p><a href="/pets/<%= pet.id %>"><%= pet.name %></a></p>
+        <% end %>
+<p>Status: <%= @adopt_app.status %></p><br>
+<% if @adopt_app.status == "In Progress" %> 
 <hr>
-<h3>  Add a Pet to this Application </h3> 
+  <h3>  Add a Pet to this Application </h3> 
+  <%= form_with url: "/adopt_apps/#{@adopt_app.id}", method: :get, local: true do |form| %>
     <%= form.label(:search_pets, "Search pets by name:") %>
     <%= form.text_field(:search_pets) %>
     <%= form.submit("Search") %>
@@ -24,3 +23,15 @@
     </div><br>
   <% end %>
 <% end %>
+
+<% if @adopt_app.status == "In Progress" && @pets.count > 0 %>
+  <hr>
+  <h3>  Submit Application </h3> 
+    <%= form_with url: "/adopt_apps/#{@adopt_app.id}", method: :patch, local: true do |form|  %>
+      <%= form.label(:description, "Why I would make a good owner for these pet(s):") %>
+      <%= form.text_field(:description) %>
+      <%= form.submit("Sumbit") %>
+  <% end %>
+<% end %>
+
+
