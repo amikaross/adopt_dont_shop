@@ -58,10 +58,10 @@ RSpec.describe Shelter, type: :model do
                                  description: "I want a best friend.",
                                  status: "Pending"
                                 )
-        AdoptAppPet.create!(adopt_app: app, pet: pet_1)
-        AdoptAppPet.create!(adopt_app: app, pet: pet_3)
-
-        expect(Shelter.pending_application).to eq([@shetler_1, @shelter_3])
+        AdoptAppPet.create!(adopt_app: app, pet: @pet_1)
+        AdoptAppPet.create!(adopt_app: app, pet: @pet_3)
+        
+        expect(Shelter.pending_applications).to eq([@shelter_1, @shelter_3])
       end
     end
   end
