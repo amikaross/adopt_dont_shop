@@ -34,3 +34,5 @@
                                   description: "Want companion.",
                                   status: "In Progress"
                                 )
+AdoptAppPet.create!(adopt_app: @app, pet: @pet_1)
+AdoptAppPet.create!(adopt_app: @app, pet: @pet_4)
