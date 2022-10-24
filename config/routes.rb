@@ -39,10 +39,11 @@ Rails.application.routes.draw do
 
   get '/adopt_apps/new', to: 'adopt_apps#new'
   post'/adopt_apps/new', to: 'adopt_apps#create'
-  get 'adopt_apps/:id', to: 'adopt_apps#show'
-  patch 'adopt_apps/:id', to: 'adopt_apps#update'
+  get '/adopt_apps/:id', to: 'adopt_apps#show'
+  patch '/adopt_apps/:id', to: 'adopt_apps#update'
 
   get '/admin/shelters', to: 'admin_shelters#index'
   get '/admin/adopt_apps/:id', to: 'admin_adopt_apps#show'
+  patch '/admin/adopt_apps/:id', to: 'admin_adopt_apps#update'
 
 end

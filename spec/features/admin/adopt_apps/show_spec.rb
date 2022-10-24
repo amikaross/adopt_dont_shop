@@ -27,7 +27,6 @@ RSpec.describe "the Admin AdoptApps show page" do
 
       it "displays the application attributes" do  
         visit "admin/adopt_apps/#{@app.id}"
-require 'pry'; binding.pry
         expect(page).to have_content("Bare-y Manilow")
         expect(page).to have_content("Lobster")
         expect(page).to have_content("Sylvester")
@@ -36,26 +35,24 @@ require 'pry'; binding.pry
         expect(page).to_not have_content("Mako")
       end
 
-      xit "displays a approval radio button" do 
+      it "displays a approval button" do 
         visit "admin/adopt_apps/#{@app.id}"
+# save_and_open_page
+        expect(current_path).to eq("/admin/adopt_apps/#{@app.id}")
+        within "##{@pet_1.id}" do
+          expect(page).to have_content("Bare-y Manilow")
+          expect(page).to have_button("Approve")
+          expect(page).to have_button("Reject")
+          click_button("Approve")
+          expect(current_path).to eq("/admin/adopt_apps/#{@app.id}")
+          expect(page).to_not have_content("Reject")
+          expect(page).to have_content("Approved")
+          expect(page).to_not have_content("Rejected")
+        end 
 
-        # expect(page).to_not have_link("Jojo", href: "/pets/#{@pet_5.id}")
-        # expect(page).to have_field("search_pets")
-        # fill_in "search_pets", with: "Jo"
-        # click_button("Search")
-        
-        # expect(current_path).to eq("/adopt_apps/#{@app.id}")
-        # within "##{@pet_4.id}" do
-        #   expect(page).to have_content("Josie")
-        #   expect(page).to have_button("Adopt This Pet")
-        # end 
-        # within "##{@pet_5.id}" do
-        #   expect(page).to have_content("Jojo")
-        #   expect(page).to have_button("Adopt This Pet")
-        #   click_button("Adopt This Pet")
-        # end 
-        # expect(current_path).to eq("/adopt_apps/#{@app.id}")
-        # expect(page).to have_link("Jojo", href: "/pets/#{@pet_5.id}")
+        # expect(page).to have_button("Approve")
+
+
       end
     end
   end

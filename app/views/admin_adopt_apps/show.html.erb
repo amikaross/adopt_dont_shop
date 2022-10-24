@@ -2,11 +2,15 @@
 <h1> Application Decision </h1>
 
 <% @pets.each do |pet| %>
-  <p><b><%= pet.name %></b></p>    
-<%= button_to "Approve", "admin/adopt_apps/#{@adopt_app.id}", form: {style: 'display:inline-block;'}, method: :patch, params: {pet_id: pet.id} %>
-<%= button_to "Reject", "admin/adopt_apps/#{@adopt_app.id}", form: {style: 'display:inline-block;'}, method: :patch, params: {pet_id: pet.id} %>
-
-
-
-
-  <% end %>
+  <div id="<%= pet.id %>">
+    <p><b><%= pet.name %></b>
+    <% if pet.approval_status(params[:id]) == 'approve'%>
+    Approved 
+    <% elsif pet.approval_status(params[:id]) == 'reject'%>
+    Rejected
+    <%else%>
+    <%= button_to "Approve", "/admin/adopt_apps/#{@adopt_app.id}", form: {style: 'display:inline-block;'}, method: :patch, params: {pet_id: pet.id, approval_status: 'approve'} %>
+    <%= button_to "Reject", "/admin/adopt_apps/#{@adopt_app.id}", form: {style: 'display:inline-block;'}, method: :patch, params: {pet_id: pet.id, approval_status: 'reject'} %>
+    <%end%> </p>
+  </div>
+<% end %>
