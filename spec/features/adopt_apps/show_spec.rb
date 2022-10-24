@@ -37,12 +37,12 @@ RSpec.describe "the AdoptApps show page" do
         expect(page).to have_content("Status: In Progress")
       end
 
-      it "displays a search field for Pets that returns matches and an 'adopt this Pet' button" do 
+      it "displays a search field for Pets that returns partial/case-insensitive matches and an 'adopt this Pet' button" do 
         visit "/adopt_apps/#{@app.id}"
 
         expect(page).to_not have_link("Jojo", href: "/pets/#{@pet_5.id}")
         expect(page).to have_field("search_pets")
-        fill_in "search_pets", with: "Jo"
+        fill_in "search_pets", with: "jo"
         click_button("Search")
         
         expect(current_path).to eq("/adopt_apps/#{@app.id}")
