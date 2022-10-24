@@ -28,8 +28,8 @@ class AdoptAppsController < ApplicationController
     if app.valid?
       redirect_to "/adopt_apps/#{app.id}"
     else 
-      @errors = app.errors.full_messages
-      render :new
+      redirect_to "/adopt_apps/new"
+      flash[:alert] = "Error: #{error_message(app.errors)}"
     end 
   end
 
