@@ -21,6 +21,18 @@ RSpec.describe 'the application update' do
                                   status: "In Progress"
                                 )
       end
+
+      it "has an 'adopt this Pet' button which adds Pets to the adoption" do 
+        visit "/adopt_apps/#{@app.id}"
+        fill_in "search_pets", with: "Jo"
+        click_button("Search")
+        within "##{@pet_5.id}" do
+          click_button("Adopt This Pet")
+        end 
+        expect(current_path).to eq("/adopt_apps/#{@app.id}")
+        expect(page).to have_link("Jojo", href: "/pets/#{@pet_5.id}")
+        expect(@app.pets).to eq([@pet_5])
+      end 
       
       it 'has a section to submit my application when one or more pets are added' do
         visit "/adopt_apps/#{@app.id}"
