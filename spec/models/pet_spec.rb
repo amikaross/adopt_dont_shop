@@ -44,5 +44,20 @@ RSpec.describe Pet, type: :model do
         expect(@pet_3.shelter_name).to eq(@shelter_1.name)
       end
     end
+
+    describe 'approval_status' do 
+      it 'returns the approval status' do 
+        app = AdoptApp.create!(name: "Amanda Ross", 
+                                 street_address: "3220 N Williams St.", 
+                                 city: "Denver", 
+                                 state: "CO", 
+                                 zip_code: "80205", 
+                                 description: "I want a best friend.",
+                                 status: "In Progress"
+                               )
+        AdoptAppPet.create!(adopt_app: app, pet: @pet_1, approval_status: 'approved')
+        expect(@pet_1.approval_status(app.id)).to eq('approved')
+      end
+    end
   end
 end
