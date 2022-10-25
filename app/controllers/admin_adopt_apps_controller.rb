@@ -10,6 +10,11 @@ class AdminAdoptAppsController < ApplicationController
     if params[:approval_status]
       adopt_app_pets.update(:approval_status => params[:approval_status])
     end
+    if adopt_app.approved_application? 
+      adopt_app.update(status: "Approved")
+    elsif adopt_app.rejected_application? 
+      adopt_app.update(status: "Rejected")
+    end
     redirect_to "/admin/adopt_apps/#{adopt_app.id}"
   end
 end
