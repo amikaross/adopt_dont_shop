@@ -42,23 +42,26 @@ RSpec.describe "the AdoptApps show page" do
 
         expect(page).to_not have_link("Jojo", href: "/pets/#{@pet_5.id}")
         expect(page).to have_field("search_pets")
+
         fill_in "search_pets", with: "jo"
         click_button("Search")
         
         expect(current_path).to eq("/adopt_apps/#{@app.id}")
+
         within "##{@pet_4.id}" do
           expect(page).to have_content("Josie")
           expect(page).to have_button("Adopt This Pet")
         end 
+
         within "##{@pet_5.id}" do
           expect(page).to have_content("Jojo")
           expect(page).to have_button("Adopt This Pet")
           click_button("Adopt This Pet")
         end 
+        
         expect(current_path).to eq("/adopt_apps/#{@app.id}")
         expect(page).to have_link("Jojo", href: "/pets/#{@pet_5.id}")
       end
     end
   end
-
 end

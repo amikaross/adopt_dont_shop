@@ -26,9 +26,11 @@ RSpec.describe 'the application update' do
         visit "/adopt_apps/#{@app.id}"
         fill_in "search_pets", with: "Jo"
         click_button("Search")
+
         within "##{@pet_5.id}" do
           click_button("Adopt This Pet")
         end 
+
         expect(current_path).to eq("/adopt_apps/#{@app.id}")
         expect(page).to have_link("Jojo", href: "/pets/#{@pet_5.id}")
         expect(@app.pets).to eq([@pet_5])
@@ -36,6 +38,7 @@ RSpec.describe 'the application update' do
       
       it 'has a section to submit my application when one or more pets are added' do
         visit "/adopt_apps/#{@app.id}"
+
         expect(page).to_not have_content('Lobster')
         expect(page).to_not have_field(:description)
         expect(page).to_not have_content("Why I would make a good owner for these pet(s):")
@@ -45,6 +48,7 @@ RSpec.describe 'the application update' do
         AdoptAppPet.create!(adopt_app: @app, pet: @pet_3)
         
         visit "/adopt_apps/#{@app.id}"
+
         expect(page).to have_link('Lobster', href: "/pets/#{@pet_2.id}")
         expect(page).to have_field(:description)
         expect(page).to have_content("Why I would make a good owner for these pet(s):")
@@ -54,10 +58,14 @@ RSpec.describe 'the application update' do
         AdoptAppPet.create!(adopt_app: @app, pet: @pet_1)
         AdoptAppPet.create!(adopt_app: @app, pet: @pet_2)
         AdoptAppPet.create!(adopt_app: @app, pet: @pet_3)
+
         visit "/adopt_apps/#{@app.id}"
+
         expect(page).to_not have_content('I have a nice, loving home')
+
         fill_in 'description', with: 'I have a nice, loving home'
         click_button("Sumbit")
+        
         expect(current_path).to eq("/adopt_apps/#{@app.id}")
         expect(page).to have_content("Description: I have a nice, loving home")
         expect(page).to have_content("Status: Pending")

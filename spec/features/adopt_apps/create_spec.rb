@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Application creation' do
   describe 'the application new' do
-    it 'renders the new form' do
+    it 'renders a form with fields to create a new application' do
       visit '/adopt_apps/new'
+
       expect(page).to have_content('Adoption Application')
       expect(find('form')).to have_content('Name')
       expect(find('form')).to have_content('Street address')
@@ -26,15 +27,15 @@ RSpec.describe 'Application creation' do
         click_button "Submit"
 
         app = AdoptApp.last 
+
         expect(page).to have_current_path("/adopt_apps/#{app.id}")
         expect(page).to have_content('Kristen Nestler')
         expect(page).to have_content('In Progress')
-
       end
     end
 
     context 'given invalid data' do 
-      it 'redirects the user back to new applications page and displays a message to fill in missing fields' do
+      it ' when fields are left blank it redirects the user back to new applications page and displays a message to fill in missing fields' do
         visit 'adopt_apps/new'
 
         fill_in 'Name', with: 'Kristen Nestler'
@@ -43,9 +44,10 @@ RSpec.describe 'Application creation' do
         click_button "Submit"
 
         expect(current_path).to eq('/adopt_apps/new')
-        expect(page).to have_content("Error: State can't be blank, Zip code can't be blank")
+        within "#errors" do 
+          expect(page).to have_content("Error: State can't be blank, Zip code can't be blank")
+        end
       end
     end
   end
-
 end
