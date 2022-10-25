@@ -26,8 +26,8 @@ class AdoptAppsController < ApplicationController
     if app.valid?
       redirect_to "/adopt_apps/#{app.id}"
     else 
-      redirect_to "/adopt_apps/new"
       flash[:alert] = "Error: #{error_message(app.errors)}"
+      render :new
     end 
   end
 
