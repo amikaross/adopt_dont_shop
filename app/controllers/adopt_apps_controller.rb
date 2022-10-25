@@ -8,16 +8,15 @@ class AdoptAppsController < ApplicationController
   end
 
   def update 
-    @adopt_app = AdoptApp.find(params[:id])
+    adopt_app = AdoptApp.find(params[:id])
     if params[:pet_id] != nil 
-      @pet = Pet.find(params[:pet_id])
-      AdoptAppPet.create!(pet: @pet, adopt_app: @adopt_app)
+      pet = Pet.find(params[:pet_id])
+      AdoptAppPet.create!(pet: pet, adopt_app: adopt_app)
     end
-
     if params[:description] != nil
-      @adopt_app.update(:description => params[:description], :status => "Pending")
+      adopt_app.update(:description => params[:description], :status => "Pending")
     end
-    redirect_to "/adopt_apps/#{@adopt_app.id}"
+    redirect_to "/adopt_apps/#{adopt_app.id}"
   end
 
   def new 
