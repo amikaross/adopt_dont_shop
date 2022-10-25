@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Application creation' do
   describe 'the application new' do
-    it 'renders the new form' do
+    it 'renders a form with fields to create a new application' do
       visit '/adopt_apps/new'
+
       expect(page).to have_content('Adoption Application')
       expect(find('form')).to have_content('Name')
       expect(find('form')).to have_content('Street address')
@@ -26,10 +27,10 @@ RSpec.describe 'Application creation' do
         click_button "Submit"
 
         app = AdoptApp.last 
+
         expect(page).to have_current_path("/adopt_apps/#{app.id}")
         expect(page).to have_content('Kristen Nestler')
         expect(page).to have_content('In Progress')
-
       end
     end
 
@@ -47,5 +48,4 @@ RSpec.describe 'Application creation' do
       end
     end
   end
-
 end
