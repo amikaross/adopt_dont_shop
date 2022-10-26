@@ -12,6 +12,7 @@ class AdminAdoptAppsController < ApplicationController
     end
     if adopt_app.approved_application? 
       adopt_app.update(status: "Approved")
+      adopt_app.pets.update_all(adoptable: false)
     elsif adopt_app.rejected_application? 
       adopt_app.update(status: "Rejected")
     end
