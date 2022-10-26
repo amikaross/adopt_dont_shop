@@ -17,7 +17,7 @@ RSpec.describe "the Admin AdoptApps show page" do
                                  state: "CO", 
                                  zip_code: "80205", 
                                  description: "I want a best friend.",
-                                 status: "In Progress"
+                                 status: "Pending"
                                )
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_1)
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_2)
@@ -31,6 +31,7 @@ RSpec.describe "the Admin AdoptApps show page" do
         expect(page).to_not have_content("Josie")
         expect(page).to_not have_content("Jojo")
         expect(page).to_not have_content("Mako")
+        expect(page).to have_content("Current Status: Pending")
       end
 
       it "displays an approval and reject button for each pet, which when clicked redirects you back to show page with buttons removed, and indicator of status showing" do 
@@ -47,7 +48,7 @@ RSpec.describe "the Admin AdoptApps show page" do
                                  state: "CO", 
                                  zip_code: "80205", 
                                  description: "I want a best friend.",
-                                 status: "In Progress"
+                                 status: "Pending"
                                )
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_1)
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_2)
@@ -99,7 +100,7 @@ RSpec.describe "the Admin AdoptApps show page" do
                                  state: "CO", 
                                  zip_code: "80205", 
                                  description: "I want a best friend.",
-                                 status: "In Progress"
+                                 status: "Pending"
                                )
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_1)
         AdoptAppPet.create!(adopt_app: app_1, pet: pet_2)
@@ -111,7 +112,7 @@ RSpec.describe "the Admin AdoptApps show page" do
                                 state: "CO", 
                                 zip_code: "80233", 
                                 description: "Because I have pets that need friends.",
-                                status: "In Progress"
+                                status: "Pending"
                                )
                         AdoptAppPet.create!(adopt_app: app_2, pet: pet_1)
                         AdoptAppPet.create!(adopt_app: app_2, pet: pet_2)
@@ -141,5 +142,4 @@ RSpec.describe "the Admin AdoptApps show page" do
       end
     end
   end
-
 end
