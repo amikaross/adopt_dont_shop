@@ -8,11 +8,11 @@ class AdoptApp < ApplicationRecord
   has_many :adopt_app_pets
   has_many :pets, through: :adopt_app_pets
 
-  def approved_application? 
-    pets.all? { |pet| pet.approval_status(id) == "approve" }
+  def all_pets_evaluated? 
+    pets.where(adopt_app_pets: {approval_status: nil}).exists? == false
   end
 
-  def rejected_application? 
-    pets.all? { |pet| pet.approval_status(id) != nil } && pets.any? { |pet| pet.approval_status(id) == "reject" }
+  def rejected_pets? 
+    pets.where(adopt_app_pets: {approval_status: "reject"}).exists?
   end
 end
