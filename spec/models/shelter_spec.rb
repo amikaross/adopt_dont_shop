@@ -44,7 +44,7 @@ RSpec.describe Shelter, type: :model do
 
     describe '#order_by_name' do 
       it 'orders the shelters alphabetically by name' do 
-        expect(Shelter.order_by_name).to eq([@shelter_1, @shelter_3, @shelter_2])
+        expect(Shelter.order_by_name).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
 
